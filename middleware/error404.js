@@ -1,13 +1,10 @@
+const NotFound = require("../errors/NotFound");
+
+const { sendRes } = require("./errorHandler");
+
+
 module.exports = function (req, res, next)
 {
-
 	// return message for error 404 not found
-	res.format({
-		json: () =>
-		{
-			res.status(404).json({
-				message: "Error: page not found"
-			});
-		}
-	});
+	sendRes(new NotFound("Error 404: page not found"), res);
 };

@@ -1,4 +1,4 @@
-const AuthError = require("./AuthError");
+const AuthError = require("../errors/AuthError");
 
 /**
  * @param {*} role 
