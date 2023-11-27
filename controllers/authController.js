@@ -23,10 +23,12 @@ async function register(req, res, next)
 	});
 
 	// generate JWT token
+	// @ts-ignore
 	const token = jwt.sign(newUser, process.env.JWT_SECRET, {
 		expiresIn: "6h",
 	});
 
+	// @ts-ignore
 	delete newUser.password;
 
 	res.json({

@@ -2,7 +2,6 @@ const AuthError = require("./AuthError");
 const jsonwebtoken = require("jsonwebtoken");
 
 /**
- *
  * @param {import("express").Request} req
  * @param {*} res
  * @param {*} next
