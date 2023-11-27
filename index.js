@@ -12,6 +12,7 @@ app.use(express.json());
 app.use("/posts", require("./routers/postsRouter"));
 app.use("/categories", require("./routers/categoriesRouter"));
 app.use("/tags", require("./routers/tagsRouter"));
+app.use("", require("./routers/authRouter"));
 
 // import middleware
 app.use(notFound);
