@@ -1,0 +1,37 @@
+{
+	"dependencies": {
+		"@prisma/client": "^5.6.0",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"express-validator": "^7.0.1",
+		"nodemon": "^3.0.1",
+		"prisma": "^5.6.0"
+	},
+	"name": "express-api-crud",
+	"description": "1. **Eseguire quanto segue:**",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/StefanoGalandrini/express-api-crud.git"
+	},
+	"keywords": [
+		"Node",
+		"Express.js",
+		"Prisma",
+		"Api",
+		"CRUD",
+		"Database",
+		"MySQL"
+	],
+	"author": "Stefano Galandrini",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/StefanoGalandrini/express-api-crud/issues"
+	},
+	"homepage": "https://github.com/StefanoGalandrini/express-api-crud#readme"
+}

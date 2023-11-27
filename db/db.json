@@ -1,0 +1,32 @@
+[
+	{
+		"title": "La magia della programmazione",
+		"image": "image1.jpg",
+		"content": "Esplorare il mondo della programmazione è come scoprire una nuova forma di magia.",
+		"published": true
+	},
+	{
+		"title": "Viaggio nel Web Development",
+		"image": "image2.jpg",
+		"content": "Il Web Development è un viaggio entusiasmante nel cuore della tecnologia moderna.",
+		"published": false
+	},
+	{
+		"title": "L'evoluzione di JavaScript",
+		"image": "image3.jpg",
+		"content": "JavaScript continua a evolversi e a sorprenderci con le sue capacità.",
+		"published": true
+	},
+	{
+		"title": "La bellezza del design frontend",
+		"image": null,
+		"content": "Il design frontend combina creatività e tecnologia per creare esperienze utente indimenticabili.",
+		"published": true
+	},
+	{
+		"title": "Backend: il motore nascosto",
+		"image": "image4.jpg",
+		"content": "Il backend è il motore nascosto che alimenta le applicazioni web, lavorando silenziosamente dietro le quinte.",
+		"published": false
+	}
+]
