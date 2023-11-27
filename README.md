@@ -1,21 +1,19 @@
-# EX-EXPRESS-API-CRUD-RELATIONSHIPS
+# EX-EXPRESS-API-CRUD-AUTH
 
 ## Panoramica
 
 1. **Eseguire quanto segue:**
 
-   - partendo dal lavoro svolto ieri, aggiungeremo i seguenti modelli con le relative relazioni col modello Post:
+   - aggiungiamo l’autenticazione al nostro progetto:
 
-     - Category (one-to-many): Ogni Post deve avere una categoria associata, e una categoria può avere più Post associati.
-     - Tags (many-to-many): Ogni Post può avere uno o più tag associati, e ogni Tag può avere uno o più Post associati.
+     - Create tutto il necessario (Model, Controller, rotte e validazioni) per implementare le due funzionalità principali:
+       1. Creazione nuovo utente: rotta POST /register
+       2. Login utente: rotta POST /login
 
-   - Successivamente, aggiungete la validazione dei dati utilizzando Express Validator alle rotte del vostro blog.
+   - Proteggete, attraverso un middleware che verifichi il token JWT passato nell’header della richiesta, le rotte di creazione, modifica e cancellazione della risorsa Post.
 
-   - Infine, assicuratevi che le richieste di lettura GET restituiscano anche la categoria e i tags di ogni singolo Post.
-
-**Piccolo suggerimento:** Se avete già popolato la tabella dei posts indicate il campo categoryId come nullable o un valore di default altrimenti avreste un errore in fase di migrazione.
+   - Aggiungete la policy CORS per consentire a qualunque dominio di accedere alle API (tanto siamo in locale).
 
 2. **Bonus:**
-   1. Implementare le operazioni di CRUD per il modello Category.
-   2. Implementare le operazioni di CRUD per il modello Tag.
-   3. Implementare le validazioni tramite Schema e middleware dedicato.
+   1. Aggiungete una relazione one-to-many fra i modelli User e Post.
+   2. Aggiungete un middleware che verifichi che un utente possa modificare o cancellare solo i Post a lui associati, altrimenti restituisca un errore 403.
