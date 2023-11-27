@@ -2,7 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 const app = express();
-const errorHandler = require("./middleware/error500");
+const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/error404");
 
 
