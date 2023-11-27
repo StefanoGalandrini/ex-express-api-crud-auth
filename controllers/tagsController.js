@@ -2,26 +2,21 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const generateSlug = require("../utilities/generateSlug");
 
-async function store(req, res, next)
+async function store(req, res)
 {
-	try
-	{
-		const { name } = req.body;
-		const slug = await generateSlug(name);
+	const { name } = req.body;
+	const slug = await generateSlug(name);
 
-		const newTag = await prisma.tag.create({
-			data: {
-				name: name,
-				slug: slug
-			}
-		});
+	const newTag = await prisma.tag.create({
+		data: {
+			name: name,
+			slug: slug
+		}
+	});
 
-		return res.json(newTag);
-	} catch (error)
-	{
-		next(error);
-	}
-}
+	return res.json(newTag);
+};
+
 
 module.exports = {
 	store,
