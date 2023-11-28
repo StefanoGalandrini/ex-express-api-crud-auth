@@ -12,9 +12,18 @@ const authHandler = require("../middleware/authHandler");
 const authRoleHandler = require("../middleware/authRoleHandler");
 
 router.get("/", postsController.index);
-router.post("/", authHandler, checkSchema(postsCreate), checkValidity, postsController.create);
+router.post("/",
+	authHandler,
+	checkSchema(postsCreate),
+	checkValidity,
+	postsController.create);
 router.get("/:slug", postsController.show);
-router.put("/:slug", authHandler, authRoleHandler("admin"), checkSchema(postsUpdate), checkValidity, postsController.update);
+router.put("/:slug",
+	authHandler,
+	authRoleHandler("admin"),
+	checkSchema(postsUpdate),
+	checkValidity,
+	postsController.update);
 router.delete("/:slug", postsController.destroy);
 
 module.exports = router;
