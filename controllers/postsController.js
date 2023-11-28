@@ -51,6 +51,7 @@ async function index(req, res, next)
 		const posts = await prisma.post.findMany({
 			...queryOptions,
 			include: {
+				user: true,
 				category: true,
 				tags: true,
 			},
