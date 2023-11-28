@@ -20,8 +20,8 @@ module.exports = (req, res, next) =>
   const token = bearer.split(" ")[1];
 
   // verifico il token
-  // @ts-ignore
-  const user = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+
+  const user = jsonwebtoken.verify(token, process.env.JWT_SECRET ?? "Stefano");
 
   req["user"] = user;
 

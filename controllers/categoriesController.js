@@ -4,6 +4,16 @@ const { validationResult, matchedData } = require("express-validator");
 
 const generateSlug = require("../utilities/generateSlug");
 
+// index - read all categories
+async function index(req, res)
+{
+	const categories = await prisma.category.findMany();
+	res.json(categories);
+}
+
+
+
+// store - create a new category
 async function store(req, res)
 {
 	const validation = validationResult(req);
@@ -29,5 +39,6 @@ async function store(req, res)
 
 
 module.exports = {
+	index,
 	store,
 };

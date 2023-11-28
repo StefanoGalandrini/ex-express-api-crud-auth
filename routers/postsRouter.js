@@ -8,18 +8,18 @@ const { checkValidity } = require("../middleware/validator");
 const postsCreate = require("../validations/postsCreate");
 const postsUpdate = require("../validations/postsUpdate");
 
-const authHandler = require("../middleware/authHandler");
+// const authHandler = require("../middleware/authHandler");
 const authRoleHandler = require("../middleware/authRoleHandler");
 
 router.get("/", postsController.index);
 router.post("/",
-	authHandler,
+	// authHandler,
 	checkSchema(postsCreate),
 	checkValidity,
 	postsController.create);
 router.get("/:slug", postsController.show);
 router.put("/:slug",
-	authHandler,
+	// authHandler,
 	authRoleHandler("admin"),
 	checkSchema(postsUpdate),
 	checkValidity,

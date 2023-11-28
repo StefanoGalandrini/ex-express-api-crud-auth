@@ -2,6 +2,15 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const generateSlug = require("../utilities/generateSlug");
 
+// index - read all tags
+async function index(req, res)
+{
+	const tags = await prisma.tag.findMany();
+	res.json(tags);
+}
+
+
+// store - create a new tag
 async function store(req, res)
 {
 	const { name } = req.body;
@@ -19,5 +28,6 @@ async function store(req, res)
 
 
 module.exports = {
+	index,
 	store,
 };
