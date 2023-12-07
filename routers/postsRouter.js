@@ -20,7 +20,7 @@ router.post("/",
 router.get("/:slug", postsController.show);
 router.put("/:slug",
 	// authHandler,
-	authRoleHandler("admin"),
+	// authRoleHandler("admin"),
 	checkSchema(postsUpdate),
 	checkValidity,
 	postsController.update);

@@ -94,7 +94,7 @@ async function create(req, res, next)
 			categoryId: req.body.categoryId,
 			userId: 1,
 			tags: {
-				connect: req.body.tags.map(tag => ({ id: tag })),
+				connect: req.body.tags.map(tag => ({ id: tag.id })),
 			},
 		},
 		include: {
@@ -179,7 +179,7 @@ async function update(req, res, next)
 	{
 		updateData.tags = {
 			set: [],
-			connect: req.body.tags,
+			connect: req.body.tags.map(tag => ({ id: tag.id })),
 		};
 	}
 
