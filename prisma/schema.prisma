@@ -10,6 +10,7 @@ datasource db {
 model Post {
   id         Int      @id @default(autoincrement())
   title      String   @db.VarChar(100)
+  author     String   @db.VarChar(100)
   slug       String   @unique(map: "Post_slug_key") @db.VarChar(150)
   image      String?  @db.Text
   content    String   @db.Text

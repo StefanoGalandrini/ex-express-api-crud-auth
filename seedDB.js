@@ -7,20 +7,20 @@ const path = require("path");
 const generateSlug = require("./generateSlug.js");
 
 
-async function createCategories()
-{
-	await prisma.category.create({ data: { name: "Programmazione e Sviluppo Web", slug: generateSlug("Programmazione e Sviluppo Web") } });
-	await prisma.category.create({ data: { name: "Framework per Frontend e Backend", slug: generateSlug("Framework per Frontend e Backend") } });
-	await prisma.category.create({ data: { name: "Gestione database relazionali", slug: generateSlug("Gestione database relazionali") } });
-	await prisma.category.create({ data: { name: "Argomenti di interesse generale", slug: generateSlug("Argomenti di interesse generale") } });
-}
+// async function createCategories()
+// {
+// 	await prisma.category.create({ data: { name: "Programmazione e Sviluppo Web", slug: generateSlug("Programmazione e Sviluppo Web") } });
+// 	await prisma.category.create({ data: { name: "Framework per Frontend e Backend", slug: generateSlug("Framework per Frontend e Backend") } });
+// 	await prisma.category.create({ data: { name: "Gestione database relazionali", slug: generateSlug("Gestione database relazionali") } });
+// 	await prisma.category.create({ data: { name: "Argomenti di interesse generale", slug: generateSlug("Argomenti di interesse generale") } });
+// }
 
 
 
 
 async function main()
 {
-	await createCategories();
+	// await createCategories();
 
 	const rawData = fs.readFileSync(path.resolve(__dirname, './', 'db', 'db.json'), 'utf8');
 	const postsData = JSON.parse(rawData);

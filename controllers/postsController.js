@@ -80,13 +80,14 @@ async function create(req, res, next)
 		);
 	}
 
-	const { title, image, content, published } = req.body;
+	const { title, author, image, content, published } = req.body;
 	const slug = await generateSlug(title);
 
 	const newPost = await prisma.post.create({
 		data: {
 			title,
 			slug,
+			author,
 			image,
 			content,
 			published,

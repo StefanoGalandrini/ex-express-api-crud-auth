@@ -2,6 +2,7 @@
 CREATE TABLE `Post` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(100) NOT NULL,
+    `author` VARCHAR(100) NOT NULL,
     `slug` VARCHAR(150) NOT NULL,
     `image` TEXT NULL,
     `content` TEXT NOT NULL,
