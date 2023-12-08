@@ -1,0 +1,14 @@
+[
+	{
+		"email": "admin@email.it",
+		"name": "admin",
+		"role": "admin",
+		"password": "Admin00!"
+	},
+	{
+		"email": "stefano@email.it",
+		"name": "Stefano Galandrini",
+		"role": "user",
+		"password": "Password00!"
+	}
+]

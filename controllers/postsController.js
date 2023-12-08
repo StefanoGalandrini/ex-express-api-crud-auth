@@ -91,8 +91,8 @@ async function create(req, res, next)
 			image,
 			content,
 			published,
-			categoryId: req.body.categoryId,
-			userId: 1,
+			categoryId,
+			userId,
 			tags: {
 				connect: req.body.tags.map(tag => ({ id: tag.id })),
 			},

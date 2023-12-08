@@ -16,7 +16,7 @@ model Post {
   content    String   @db.Text
   published  Boolean  @default(false)
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   categoryId Int      @default(1)
   userId     Int      @default(1)
   category   Category @relation(fields: [categoryId], references: [id])
@@ -29,7 +29,7 @@ model Category {
   name      String   @unique(map: "Category_name_key") @db.VarChar(100)
   slug      String   @unique(map: "Category_slug_key") @db.VarChar(150)
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   posts     Post[]
 }
 
@@ -38,7 +38,7 @@ model Tag {
   name      String   @unique(map: "Tag_name_key") @db.VarChar(100)
   slug      String   @unique(map: "Tag_slug_key") @db.VarChar(150)
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   posts     Post[]
 }
 

@@ -1,0 +1,35 @@
+[
+	{
+		"name": "Frontend"
+	},
+	{
+		"name": "Backend"
+	},
+	{
+		"name": "HTML/CSS"
+	},
+	{
+		"name": "JavaScript"
+	},
+	{
+		"name": "Vue JS"
+	},
+	{
+		"name": "React"
+	},
+	{
+		"name": "PHP"
+	},
+	{
+		"name": "Laravel"
+	},
+	{
+		"name": "Node JS"
+	},
+	{
+		"name": "Express JS"
+	},
+	{
+		"name": "MySql"
+	}
+]

@@ -2,35 +2,35 @@
 	{
 		"title": "La magia della programmazione",
 		"author": "Stefano G",
-		"image": "https://picsum.photos/200/300",
+		"image": "https://picsum.photos/id/20/200/300",
 		"content": "Esplorare il mondo della programmazione è come scoprire una nuova forma di magia.",
 		"published": true
 	},
 	{
 		"title": "Viaggio nel Web Development",
 		"author": "Stefano G",
-		"image": "https://picsum.photos/200/300",
+		"image": "https://picsum.photos/id/55/200/300",
 		"content": "Il Web Development è un viaggio entusiasmante nel cuore della tecnologia moderna.",
 		"published": false
 	},
 	{
 		"title": "L'evoluzione di JavaScript",
 		"author": "Stefano G",
-		"image": "https://picsum.photos/200/300",
+		"image": "https://picsum.photos/id/64/200/300",
 		"content": "JavaScript continua a evolversi e a sorprenderci con le sue capacità.",
 		"published": true
 	},
 	{
 		"title": "La bellezza del design frontend",
 		"author": "Stefano G",
-		"image": "https://picsum.photos/200/300",
+		"image": "https://picsum.photos/id/72/200/300",
 		"content": "Il design frontend combina creatività e tecnologia per creare esperienze utente indimenticabili.",
 		"published": true
 	},
 	{
 		"title": "Backend: il motore nascosto",
 		"author": "Stefano G",
-		"image": "image4.https://picsum.photos/200/300",
+		"image": "image4.https://picsum.photos/id/125/200/300",
 		"content": "Il backend è il motore nascosto che alimenta le applicazioni web, lavorando silenziosamente dietro le quinte.",
 		"published": false
 	}

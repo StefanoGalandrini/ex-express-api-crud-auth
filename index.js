@@ -3,7 +3,6 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const app = express();
 const cors = require("cors");
-const uploadRouter = require("./routers/uploadRouter");
 
 // import errors middleware
 const errorHandler = require("./middleware/errorHandler");
@@ -30,7 +29,7 @@ app.use("/categories", require("./routers/categoriesRouter"));
 app.use("/tags", require("./routers/tagsRouter"));
 app.use("/users", require("./routers/usersRouter"));
 app.use("", require("./routers/authRouter"));
-app.use("/", uploadRouter);
+
 
 // import middleware
 app.use(notFound);
