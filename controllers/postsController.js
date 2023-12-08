@@ -156,11 +156,15 @@ async function update(req, res, next)
 		where: {
 			slug: slug,
 		},
+		include: {
+			category: true,
+			tags: true,
+		},
 	});
 
 	if (!post)
 	{
-		throw new Error(`Post not found with slug: ${slug}`);
+		return next(new NotFound(`Post not found with slug: ${slug}`));
 	}
 
 	if (req.body.title)
@@ -177,9 +181,18 @@ async function update(req, res, next)
 	// update tags
 	if (req.body.tags)
 	{
+		// Ottenere gli ID dei tag esistenti
+		const existingTagIds = post.tags.map(tag => tag.id);
+		// Ottenere gli ID dei nuovi tag da req.body
+		const newTagIds = req.body.tags.map(tag => tag.id);
+
+		// Determinare quali tag devono essere disaccoppiati e quali collegati
+		const tagsToDisconnect = existingTagIds.filter(id => !newTagIds.includes(id));
+		const tagsToConnect = newTagIds.filter(id => !existingTagIds.includes(id));
+
 		updateData.tags = {
-			set: [],
-			connect: req.body.tags.map(tag => ({ id: tag.id })),
+			disconnect: tagsToDisconnect.map(id => ({ id })),
+			connect: tagsToConnect.map(id => ({ id })),
 		};
 	}
 

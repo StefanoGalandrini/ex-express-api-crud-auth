@@ -18,6 +18,7 @@ async function createTags()
 	await prisma.tag.create({ data: { name: "Laravel", slug: generateSlug("Laravel") } });
 	await prisma.tag.create({ data: { name: "Express JS", slug: generateSlug("Express JS") } });
 	await prisma.tag.create({ data: { name: "Node Js", slug: generateSlug("Node JS") } });
+	await prisma.tag.create({ data: { name: "JavaScript", slug: generateSlug("JavaScript") } });
 }
 
 
