@@ -155,7 +155,6 @@ async function show(req, res, next)
  */
 async function update(req, res, next)
 {
-	console.log("REQUEST BODY:", req.body);
 	const validation = validationResult(req);
 	if (!validation.isEmpty())
 	{
@@ -164,6 +163,7 @@ async function update(req, res, next)
 
 	const { slug } = req.params;
 	let updateData = {};
+
 	const article = await prisma.post.findUnique({
 		where: { slug },
 		include: {
@@ -184,6 +184,16 @@ async function update(req, res, next)
 		updateData.slug = await generateSlug(req.body.title);
 	}
 
+	if (req.body.author)
+	{
+		updateData.author = req.body.author;
+	}
+
+	if (req.body.content)
+	{
+		updateData.content = req.body.content;
+	}
+
 	if (req.body.published)
 	{
 		updateData.published = req.body.published === 'true';
@@ -197,8 +207,8 @@ async function update(req, res, next)
 	// Gestisci i tag
 	if (req.body.tags)
 	{
-		const tagIds = req.body.tags.split(',').map(id => parseInt(id));
-		const existingTagIds = post.tags.map(tag => tag.id);
+		const tagIds = req.body.tags.map(id => parseInt(id));
+		const existingTagIds = article.tags.map(tag => tag.id);
 		const tagsToDisconnect = existingTagIds.filter(id => !tagIds.includes(id));
 		const tagsToConnect = tagIds.filter(id => !existingTagIds.includes(id));
 
@@ -215,7 +225,13 @@ async function update(req, res, next)
 		{
 			try
 			{
-				fs.unlink(article.image);
+				fs.unlink(article.image, (error) =>
+				{
+					if (error)
+					{
+						console.log("Errore nella rimozione dell'immagine esistente:", error);
+					}
+				});
 			} catch (error)
 			{
 				console.log("Errore nella rimozione dell'immagine esistente:", error);
