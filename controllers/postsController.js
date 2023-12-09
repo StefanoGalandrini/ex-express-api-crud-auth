@@ -84,8 +84,9 @@ async function create(req, res, next)
 	try
 	{
 		const { title, content, published, author, categoryId, tags } = req.body;
-		const imagePath = req.file ? req.file.path : null; // Controlla se c'è un file caricato
-		slug = await generateSlug(title); // Genera uno slug dal titolo
+		const imagePath = req.file ? req.file.path : null;
+		slug = await generateSlug(title);
+		console.log(req.file);
 
 		// Creazione del post
 		const cat = parseInt(categoryId);
@@ -94,10 +95,10 @@ async function create(req, res, next)
 				title,
 				slug,
 				content,
-				published: published === 'true', // Assicurati che published sia un booleano
+				published: published === 'true',
 				author,
 				image: imagePath,
-				categoryId: cat, // Usa l'ID della categoria selezionata
+				categoryId: cat,
 				// tags: {
 				// 	connect: tags.map(tag => ({ id: tag.id })) // Collega i tag esistenti
 				// }
@@ -138,6 +139,7 @@ async function show(req, res, next)
 
 	res.json(post);
 }
+
 
 
 // update - update a single post by slug
@@ -253,13 +255,13 @@ async function destroy(req, res, next)
 
 	if (post.image)
 	{
-		try
+		fs.unlink(post.image, (error) =>
 		{
-			await unlinkAsync(post.image);
-		} catch (error)
-		{
-			console.log("Errore nella rimozione dell'immagine esistente:", error);
-		}
+			if (error)
+			{
+				console.log("Errore nella rimozione dell'immagine esistente:", error);
+			}
+		});
 	}
 
 	await prisma.post.delete({

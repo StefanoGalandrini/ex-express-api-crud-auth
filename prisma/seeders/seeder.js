@@ -49,7 +49,6 @@ async function createPosts()
 			title: post.title,
 			slug: generateSlug(post.title),
 			author: post.author,
-			image: post.image,
 			content: post.content,
 			published: post.published,
 			userId: Math.floor(Math.random() * 2) + 1,
