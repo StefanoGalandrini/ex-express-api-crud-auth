@@ -35,7 +35,7 @@ router.post("/",
 	checkValidity,
 	postsController.create);
 router.get("/:slug", postsController.show);
-router.put("/:slug",
+router.patch("/:slug",
 	// authHandler,
 	// authRoleHandler("admin"),
 	checkSchema(postsUpdate),

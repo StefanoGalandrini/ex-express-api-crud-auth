@@ -86,7 +86,8 @@ async function create(req, res, next)
 		const { title, content, published, author, categoryId, tags } = req.body;
 		const imagePath = req.file ? req.file.path : null;
 		slug = await generateSlug(title);
-		console.log(req.file);
+		const tagIds = tags.map(tagId => parseInt(tagId));
+
 
 		// Creazione del post
 		const cat = parseInt(categoryId);
@@ -99,10 +100,14 @@ async function create(req, res, next)
 				author,
 				image: imagePath,
 				categoryId: cat,
-				// tags: {
-				// 	connect: tags.map(tag => ({ id: tag.id })) // Collega i tag esistenti
-				// }
-			}
+				tags: {
+					connect: tagIds.map(id => ({ id }))
+				}
+			},
+			include: {
+				category: true,
+				tags: true,
+			},
 		});
 
 		res.status(201).json({ message: "Post creato con successo", post });
@@ -174,9 +179,14 @@ async function update(req, res, next)
 		return next(new NotFound(`Post not found with slug: ${slug}`));
 	}
 
+	// update published
+	if (updateData.hasOwnProperty('published'))
+	{
+		updateData.published = updateData.published;
+	}
 
 	// update image
-	If(updateData.image && post.image !== updateData.image);
+	if (updateData.image && post.image !== updateData.image);
 	{
 		if (post.image)
 		{
