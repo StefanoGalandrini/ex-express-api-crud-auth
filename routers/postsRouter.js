@@ -36,6 +36,7 @@ router.post("/",
 	postsController.create);
 router.get("/:slug", postsController.show);
 router.patch("/:slug",
+	upload.single("image"),
 	// authHandler,
 	// authRoleHandler("admin"),
 	checkSchema(postsUpdate),

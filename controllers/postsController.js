@@ -155,18 +155,16 @@ async function show(req, res, next)
  */
 async function update(req, res, next)
 {
+	console.log("REQUEST BODY:", req.body);
 	const validation = validationResult(req);
 	if (!validation.isEmpty())
 	{
-		return next(
-			new validationError("Controllare i dati inseriti", validation.array())
-		);
+		return next(new validationError("Controllare i dati inseriti", validation.array()));
 	}
 
 	const { slug } = req.params;
-	let updateData = req.body;
-
-	const post = await prisma.post.findUnique({
+	let updateData = {};
+	const article = await prisma.post.findUnique({
 		where: { slug },
 		include: {
 			category: true,
@@ -174,55 +172,35 @@ async function update(req, res, next)
 		},
 	});
 
-	if (!post)
+	if (!article)
 	{
 		return next(new NotFound(`Post not found with slug: ${slug}`));
 	}
 
-	// update published
-	if (updateData.hasOwnProperty('published'))
-	{
-		updateData.published = updateData.published;
-	}
-
-	// update image
-	if (updateData.image && post.image !== updateData.image);
-	{
-		if (post.image)
-		{
-			try
-			{
-				await unlinkAsync(post.image);
-			} catch (error)
-			{
-				console.log("Errore nella rimozione dell'immagine esistente:", error);
-			}
-		}
-	}
-
-	// update title and slug
+	// Gestisci i campi di testo da FormData
 	if (req.body.title)
 	{
+		updateData.title = req.body.title;
 		updateData.slug = await generateSlug(req.body.title);
 	}
 
-	// update category
-	if (req.body.categoryId)
+	if (req.body.published)
 	{
-		updateData.categoryId = req.body.categoryId;
+		updateData.published = req.body.published === 'true';
 	}
 
-	// update tags
+	if (req.body.categoryId)
+	{
+		updateData.categoryId = parseInt(req.body.categoryId);
+	}
+
+	// Gestisci i tag
 	if (req.body.tags)
 	{
-		// Ottenere gli ID dei tag esistenti
+		const tagIds = req.body.tags.split(',').map(id => parseInt(id));
 		const existingTagIds = post.tags.map(tag => tag.id);
-		// Ottenere gli ID dei nuovi tag da req.body
-		const newTagIds = req.body.tags.map(tag => tag.id);
-
-		// Determinare quali tag devono essere disaccoppiati e quali collegati
-		const tagsToDisconnect = existingTagIds.filter(id => !newTagIds.includes(id));
-		const tagsToConnect = newTagIds.filter(id => !existingTagIds.includes(id));
+		const tagsToDisconnect = existingTagIds.filter(id => !tagIds.includes(id));
+		const tagsToConnect = tagIds.filter(id => !existingTagIds.includes(id));
 
 		updateData.tags = {
 			disconnect: tagsToDisconnect.map(id => ({ id })),
@@ -230,17 +208,42 @@ async function update(req, res, next)
 		};
 	}
 
-	const updatedPost = await prisma.post.update({
-		where: { slug },
-		data: updateData,
-		include: {
-			category: true,
-			tags: true,
-		},
-	});
+	// Gestisci l'immagine
+	if (req.file)
+	{
+		if (article.image)
+		{
+			try
+			{
+				fs.unlink(article.image);
+			} catch (error)
+			{
+				console.log("Errore nella rimozione dell'immagine esistente:", error);
+			}
+		}
+		updateData.image = req.file.path;
+	}
 
-	res.json(updatedPost);
+	// Esegui l'aggiornamento
+	try
+	{
+		const updatedPost = await prisma.post.update({
+			where: { slug },
+			data: updateData,
+			include: {
+				category: true,
+				tags: true,
+			},
+		});
+
+		res.json(updatedPost);
+	} catch (error)
+	{
+		console.error(error);
+		res.status(500).send("Errore durante l'aggiornamento dell'articolo");
+	}
 }
+
 
 
 
