@@ -4,6 +4,18 @@ const dotenv = require("dotenv").config();
 const app = express();
 const cors = require("cors");
 
+// remove favicon requests
+app.use((req, res, next) =>
+{
+	if (req.url === '/favicon.ico')
+	{
+		res.writeHead(200, { 'Content-Type': 'image/x-icon' });
+		res.end();
+		return;
+	}
+	next();
+});
+
 // import errors middleware
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/error404");
