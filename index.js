@@ -41,7 +41,6 @@ app.use("/categories", require("./routers/categoriesRouter"));
 app.use("/tags", require("./routers/tagsRouter"));
 app.use("/users", require("./routers/usersRouter"));
 app.use("", require("./routers/authRouter"));
-// app.use("/image", require("./routers/uploadsRouter"));
 
 
 // import middleware

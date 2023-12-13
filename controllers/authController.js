@@ -37,6 +37,25 @@ async function register(req, res, next)
 	});
 }
 
+async function me(req, res, next)
+{
+	const user = await prisma.user.findUnique({
+		where: {
+			id: req.user.id,
+		},
+	});
+
+	if (!user)
+	{
+		return res.status(401).json({ error: "User not found" });
+	}
+
+	// @ts-ignore
+	delete user.password;
+
+	res.json({ user });
+}
+
 async function login(req, res, next)
 {
 	const { email, password } = req.body;
@@ -72,10 +91,41 @@ async function login(req, res, next)
 		token,
 		user,
 	});
+}
+
+async function verifyToken(req, res)
+{
+	const { token } = req.body;
+
+	if (!token)
+	{
+		return res.status(401).json({ message: "Token non fornito" });
+	}
+
+	try
+	{
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		const user = await prisma.user.findUnique({
+			where: { id: decoded.id },
+			select: { id: true, email: true, name: true, /* altri campi che vuoi restituire */ }
+		});
+
+		if (!user)
+		{
+			return res.status(404).json({ message: "Utente non trovato" });
+		}
+
+		res.json({ user });
+	} catch (error)
+	{
+		res.status(401).json({ message: "Token non valido" });
+	}
 };
 
 
 module.exports = {
 	register,
 	login,
+	me,
+	verifyToken,
 };
